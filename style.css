@@ -83,7 +83,78 @@ h2 {
     display: inline-block;
 }
 
-/* Приветственный блок */
+/* Стили для страницы предметов */
+
+/* Заголовок страницы */
+.page-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.page-title h2 {
+    border-bottom: none;
+    margin-bottom: 0.5rem;
+}
+
+.page-title p {
+    font-size: 1.2rem;
+    color: #4a5b6e;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Сетка карточек предметов */
+.subjects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* Карточка предмета */
+.subject-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    border: 1px solid #e0dcd5;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.subject-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.subject-card h3 {
+    font-size: 1.6rem;
+    color: #3b5b7c;
+    margin-bottom: 0.75rem;
+}
+
+.subject-card p {
+    margin-bottom: 1.5rem;
+    color: #4a5b6e;
+    flex-grow: 1; /* чтобы ссылка всегда была внизу */
+}
+
+.subject-link {
+    display: inline-block;
+    color: #d4af37;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+    align-self: flex-start;
+}
+
+.subject-link:hover {
+    border-bottom-color: #d4af37;
+}
+
+/* Приветственный блок (оставляем для других страниц) */
 .intro {
     background-color: #e8f0fe;
     padding: 2rem;
@@ -98,7 +169,7 @@ h2 {
     margin: 1rem auto 0;
 }
 
-/* Карточки работ */
+/* Карточки работ (для главной) */
 .latest-works {
     margin-top: 2rem;
 }
@@ -183,5 +254,9 @@ footer p {
     }
     h2 {
         font-size: 1.6rem;
+    }
+    .subjects-list {
+        grid-template-columns: 1fr; /* одна колонка на мобильных */
+        gap: 1.5rem;
     }
 }
