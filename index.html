@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Классный архив — 9В</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        header {
+            background-color: #0f172a;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .logo p {
+            color: #94a3b8;
+            font-style: italic;
+            text-align: center;
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            list-style: none;
+            margin-top: 1rem;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: white;
+            border-bottom-color: #38bdf8;
+        }
+
+        /* Основные секции */
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #0f172a;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: #3b82f6;
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: #1e293b;
+        }
+
+        /* Карточки */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #0f172a;
+        }
+
+        .card p {
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        .card .meta {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+        }
+
+        .btn-outline:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        /* Галерея */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+
+        .gallery-item:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .gallery-image {
+            height: 160px;
+            background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #334155;
+            font-size: 3rem;
+        }
+
+        .gallery-item p {
+            padding: 1rem;
+            font-weight: 500;
+            text-align: center;
+            background: white;
+        }
+
+        /* Контакты + форма */
+        .contact-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1 1 300px;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-info i {
+            color: #3b82f6;
+            width: 25px;
+            display: inline-block;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Подвал */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin: 0.25rem 0;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h2 { font-size: 1.8rem; }
+            nav ul { gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <h1>Классный архив</h1>
+                <p>Сайт для наших учебных работ</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#subjects">Предметы</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Главная -->
+        <section id="home">
+            <div class="container">
+                <h2>Добро пожаловать!</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Здесь мы храним наши лучшие классные работы, проекты и творческие задания. Вы можете найти материалы по предметам, авторам или дате.</p>
+
+                <h3>Последние работы</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <h4>Проект: Разработка простого веб-сайта</h4>
+                        <div class="meta">Информатика, 9 класс</div>
+                        <p>Автор:Выдрин Глеб</p>
+                        <a href="https://cloud.mail.ru/public/pT9K/JXVTbkr7S" class="btn">Смотреть работу →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Предметы -->
+        <section id="subjects">
+            <div class="container">
+                <h2>Учебные предметы</h2>
+                <p>Здесь собраны работы по разным дисциплинам. Выберите интересующий вас предмет.</p>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <h4>Математика</h4>
+                        <p>Алгебра, геометрия, вероятности. Проекты, задачи и исследования.</p>
+                        <a href="#" class="btn-outline btn">Перейти к работам →</a>
+                    </div>
+                    <div class="card">
+                        <h4>Русский язык</h4>
+                        <p>Сочинения, изложения, лингвистические проекты.</p>
+                        <a href="#" class="btn-outline btn">Перейти к работам →</a>
+                    </div>
+                    <div class="card">
+                        <h4>Информатика</h4>
+                        <p>Программирование, сайты, презентации, алгоритмы.</p>
+                        <a href="#" class="btn-outline btn">Перейти к работам →</a>
+                    </div>
+                    <div class="card">
+                        <h4>История</h4>
+                        <p>Доклады, рефераты, исторические карты и хроники.</p>
+                        <a href="#" class="btn-outline btn">Перейти к работам →</a>
+                    </div>
+                    <div class="card">
+                        <h4>Физика</h4>
+                        <p>Лабораторные работы, опыты, исследовательские проекты.</p>
+                        <a href="#" class="btn-outline btn">Перейти к работам →</a>
+                    </div>
+                    <div class="card">
+                        <h4>ИЗО</h4>
+                        <p>Рисунки, макеты, творческие работы.</p>
+                        <a href="#" class="btn-outline btn">Перейти к работам →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section id="gallery">
+            <div class="container">
+                <h2>Галерея работ</h2>
+                <p>Фотографии, рисунки, макеты и другие визуальные проекты.</p>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-image">🎂</div>
+                        <p>Проект "Повар кондитер"</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-image">🌿</div>
+                        <p>Плакат по экологии</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-image">🍂</div>
+                        <p>Рисунок "Осенний пейзаж"</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-image">💼</div>
+                        <p>Проект "Моя будущая профессия"</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-image">🎗️</div>
+                        <p>Стенгазета ко Дню Победы</p>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-image">🔷</div>
+                        <p>Объёмная фигура "Додекаэдр"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section id="about">
+            <div class="container">
+                <h2>О нашем классе</h2>
+                <p style="font-size: 1.2rem;">Мы — ученики 9В, создаём и сохраняем лучшие работы.</p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 2rem; margin: 2rem 0;">
+                    <div style="flex: 2; min-width: 280px;">
+                        <h3>Кто мы?</h3>
+                        <p>Наш класс состоит из 24 человек — активных, творческих и увлечённых учёбой ребят. Мы участвуем в олимпиадах, конкурсах проектов и всегда рады поделиться результатами.</p>
+
+                        <h3>Зачем этот сайт?</h3>
+                        <p>Здесь мы собираем все наши значимые работы: от домашних заданий до масштабных проектов. Это удобно и для повторения, и для портфолио.</p>
+                    </div>
+                    <div style="flex: 1; min-width: 240px; background: #e2e8f0; padding: 1.5rem; border-radius: 1rem;">
+                        <h3>Наши достижения</h3>
+                        <ul style="list-style: none;">
+                            <li>🏆 Призёры городской олимпиады по информатике</li>
+                            <li>🏆 Победитель конкурса чтецов</li>
+                            <li>🏆 Лучший экологический проект школы</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts">
+            <div class="container">
+                <h2>Контакты</h2>
+                <p>Свяжитесь с нами или предложите свою работу для архива.</p>
+
+                <div class="contact-flex">
+                    <div class="contact-info">
+                        <h3>Наши координаты</h3>
+                        <p><i>📍</i> <strong>Адрес школы:</strong> г. Лениногорск, ул. Морякова, д. 24</p>
+                        <p><i>✉️</i> <strong>Email:</strong> <a href="mailto:glebyvdrin410@gmail.com">glebyvdrin410@gmail.com</a></p>
+                        <p><i>📞</i> <strong>Телефон:</strong> +7 (927) 679-33-60</p>
+                        <p><i>👩‍🏫</i> <strong>Классный руководитель:</strong> Хусаинова Галина Айратовна</p>
+                        <p><a href="https://www.google.com/maps?q=Голнур+Айратовна+Хусаинова" target="_blank">(посмотреть на карте)</a></p>
+                    </div>
+
+                    <div class="contact-form">
+                        <h3>Напишите нам</h3>
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <label for="name">Ваше имя:</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Сообщение:</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Отправить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Архив работ 9В класса. Все права защищены.</p>
+            <p>Сайт создан в учебных целях.</p>
+        </div>
+    </footer>
+</body>
+</html>
